@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Francisco Wisnu Mahawisesa — Production Engineer</title>
+<meta name="description" content="Francisco Alejandro Wisnu Mahawisesa — Production Engineering M.Sc. at RWTH Aachen. Battery production, project management, and hands-on engineering." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#171A20; --bg-2:#14161C; --surface:#1C2027; --surface-2:#21262F;
+    --line:#2A2F39; --line-soft:#23272F;
+    --text:#EDEFF2; --muted:#9AA0AA; --faint:#666C77;
+    --blue:#2E90FF; --blue-bright:#5FACFF; --blue-dim:rgba(46,144,255,.13);
+    --display:'Syne',sans-serif; --body:'Manrope',sans-serif; --mono:'JetBrains Mono',monospace;
+    --max:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body); background:var(--bg); color:var(--text);
+    line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  /* blueprint grid + glow backdrop */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
+    background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:44px 44px; opacity:.4;
+    -webkit-mask-image:radial-gradient(ellipse 100% 70% at 50% 0%,#000 25%,transparent 80%);
+    mask-image:radial-gradient(ellipse 100% 70% at 50% 0%,#000 25%,transparent 80%);
+  }
+  body::after{
+    content:""; position:fixed; top:-15%; right:-10%; width:60vw; height:60vw; z-index:-2; pointer-events:none;
+    background:radial-gradient(circle,rgba(46,144,255,.16),transparent 60%); filter:blur(20px);
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  .mono{font-family:var(--mono);font-weight:400}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue)}
+
+  /* ---------- nav ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
+  header.scrolled{background:rgba(20,22,28,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:var(--max);margin:0 auto;padding:0 28px}
+  .logo{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.5px;display:flex;align-items:center;gap:9px}
+  .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px var(--blue)}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{font-size:14.5px;font-weight:500;color:var(--muted);position:relative;transition:.2s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--blue);transition:.25s}
+  .nav-links a:hover,.nav-links a.active{color:var(--text)}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+  .nav-cta{padding:9px 18px;border:1px solid var(--blue);border-radius:7px;color:var(--blue)!important;font-weight:600;font-size:14px;transition:.25s}
+  .nav-cta::after{display:none}
+  .nav-cta:hover{background:var(--blue);color:#fff!important;box-shadow:0 0 20px rgba(46,144,255,.4)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0;padding:6px}
+  .burger span{width:24px;height:2px;background:var(--text);transition:.3s}
+
+  /* ---------- hero ---------- */
+  .hero{min-height:100vh;display:flex;align-items:center;padding-top:72px}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:60px;align-items:center;width:100%}
+  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(44px,6.2vw,82px);line-height:.98;letter-spacing:-1.5px;margin:18px 0}
+  .hero h1 .blue{color:var(--blue)}
+  .hero .tagline{font-size:clamp(17px,2vw,21px);color:var(--text);font-weight:600;max-width:30ch;margin-bottom:14px}
+  .hero .intro{color:var(--muted);max-width:46ch;font-size:16px;margin-bottom:30px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:8px;font-weight:600;font-size:15px;transition:.25s;cursor:pointer;border:1px solid transparent}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-bright);box-shadow:0 8px 26px rgba(46,144,255,.35);transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+  .socials{display:flex;gap:14px;align-items:center}
+  .socials .lbl{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);text-transform:uppercase;margin-right:4px}
+  .socials a{width:40px;height:40px;border:1px solid var(--line);border-radius:8px;display:grid;place-items:center;color:var(--muted);transition:.25s}
+  .socials a:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-3px);box-shadow:0 6px 18px rgba(46,144,255,.2)}
+  .socials svg{width:18px;height:18px;fill:currentColor}
+  /* portrait */
+  .portrait-wrap{position:relative;justify-self:center}
+  .portrait{width:300px;height:380px;border-radius:14px;border:1px solid var(--line);background:
+    linear-gradient(135deg,var(--surface),var(--bg-2));
+    position:relative;overflow:hidden;display:grid;place-items:center}
+  .portrait::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:28px 28px;opacity:.6}
+  .portrait .ph{position:relative;text-align:center;color:var(--faint);font-family:var(--mono);font-size:12px;letter-spacing:1px}
+  .portrait .ph svg{width:46px;height:46px;stroke:var(--faint);fill:none;stroke-width:1.4;margin-bottom:10px}
+  .corner{position:absolute;width:18px;height:18px;border:2px solid var(--blue)}
+  .corner.tl{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .corner.tr{top:-1px;right:-1px;border-left:0;border-bottom:0}
+  .corner.bl{bottom:-1px;left:-1px;border-right:0;border-top:0}
+  .corner.br{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .stat-chip{position:absolute;bottom:-22px;left:-26px;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:14px 18px;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+  .stat-chip .n{font-family:var(--display);font-weight:800;font-size:19px;color:var(--blue);line-height:1}
+  .stat-chip .t{font-size:12px;color:var(--muted);margin-top:3px}
+
+  /* ---------- sections ---------- */
+  section{padding:110px 0;position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:52px}
+  .sec-head .num{font-family:var(--mono);color:var(--blue);font-size:14px}
+  .sec-head h2{font-family:var(--display);font-weight:700;font-size:clamp(30px,4vw,46px);letter-spacing:-1px;line-height:1}
+  .sec-head .rule{flex:1;height:1px;background:var(--line);align-self:center;margin-left:8px}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:56px}
+  .about-bio p{color:var(--muted);font-size:16.5px;margin-bottom:18px}
+  .about-bio p strong{color:var(--text);font-weight:600}
+  .stats{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+  .stat{flex:1;min-width:150px;border:1px solid var(--line);border-radius:11px;padding:20px;background:var(--surface)}
+  .stat .k{font-family:var(--display);font-weight:800;font-size:22px;color:var(--blue)}
+  .stat .v{font-size:13.5px;color:var(--muted);margin-top:5px}
+  .skills h3{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);margin:0 0 14px}
+  .skill-group{margin-bottom:26px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{padding:7px 14px;border:1px solid var(--line);border-radius:20px;font-size:13.5px;color:var(--text);background:var(--surface);transition:.2s}
+  .chip:hover{border-color:var(--blue);color:var(--blue)}
+
+  /* portfolio */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;transition:.3s;display:flex;flex-direction:column;position:relative}
+  .card:hover{border-color:var(--blue);transform:translateY(-5px);box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 0 1px rgba(46,144,255,.25)}
+  .card-visual{height:150px;position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+    background:linear-gradient(135deg,var(--surface-2),var(--bg-2))}
+  .card-visual::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:26px 26px;opacity:.55}
+  .card-visual .vlabel{position:absolute;bottom:12px;left:16px;font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:1px}
+  .card-visual .vicon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;stroke:var(--blue);fill:none;stroke-width:1.3;opacity:.85}
+  .card-body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column}
+  .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .card-num{font-family:var(--mono);font-size:13px;color:var(--faint)}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.5px;color:var(--blue);background:var(--blue-dim);border:1px solid rgba(46,144,255,.3);padding:4px 10px;border-radius:6px}
+  .card h3{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.15;margin-bottom:9px;letter-spacing:-.4px}
+  .card .org{font-size:13px;color:var(--blue);margin-bottom:11px;font-weight:600}
+  .card p{font-size:14.5px;color:var(--muted);line-height:1.55}
+
+  /* contact */
+  .contact-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,var(--surface),var(--bg-2));padding:60px 50px;text-align:center;position:relative;overflow:hidden}
+  .contact-card::before{content:"";position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:70%;height:90%;background:radial-gradient(circle,rgba(46,144,255,.14),transparent 65%);pointer-events:none}
+  .contact-card h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.5vw,50px);letter-spacing:-1px;margin-bottom:16px;position:relative}
+  .contact-card p{color:var(--muted);max-width:48ch;margin:0 auto 30px;font-size:16.5px;position:relative}
+  .contact-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;margin-bottom:28px}
+  .contact-meta{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;position:relative;font-size:14px;color:var(--muted)}
+  .contact-meta a:hover{color:var(--blue)}
+  .contact-meta .mono{color:var(--faint);font-size:11px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:3px}
+
+  footer{border-top:1px solid var(--line-soft);padding:30px 0}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13.5px;color:var(--faint)}
+  .foot a:hover{color:var(--blue)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .hero .h-anim{opacity:0;transform:translateY(22px);animation:fadeUp .8s cubic-bezier(.2,.7,.3,1) forwards}
+  @keyframes fadeUp{to{opacity:1;transform:none}}
+
+  /* custom cursor */
+  .cursor-dot,.cursor-ring{display:none}
+  body.cc *{cursor:none!important}
+  body.cc .cursor-dot,body.cc .cursor-ring{display:block;position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+  body.cc .cursor-dot{width:7px;height:7px;background:var(--blue)}
+  body.cc .cursor-ring{width:34px;height:34px;border:1.5px solid var(--blue);transition:width .25s ease,height .25s ease,background .25s ease,opacity .3s}
+  body.cc .cursor-ring.hover{width:54px;height:54px;background:rgba(46,144,255,.10)}
+
+  /* responsive */
+  @media(max-width:860px){
+    .hero-grid,.about-grid{grid-template-columns:1fr;gap:46px}
+    .proj-grid{grid-template-columns:1fr}
+    .portrait-wrap{order:-1}
+    .portrait{width:240px;height:300px}
+    .nav-links{position:fixed;inset:72px 0 auto 0;flex-direction:column;background:rgba(18,20,26,.97);backdrop-filter:blur(14px);padding:26px 28px;gap:22px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.35s;align-items:flex-start}
+    .nav-links.open{transform:none}
+    .burger{display:flex}
+    section{padding:80px 0}
+    .contact-card{padding:46px 26px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<header id="hdr">
+  <nav>
+    <a href="#home" class="logo"><span class="dot"></span>Francisco<span style="color:var(--muted);font-weight:600">.</span></a>
+    <div class="nav-links" id="navlinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow h-anim" style="animation-delay:.05s">Battery Production · Production Engineer · Project Management</span>
+      <h1 class="h-anim" style="animation-delay:.15s">Francisco<br>Alejandro <span class="blue">Wisnu</span></h1>
+      <p class="tagline h-anim" style="animation-delay:.25s">Building and industrializing the batteries that move e-mobility forward.</p>
+      <p class="intro h-anim" style="animation-delay:.35s">Master's student in Production Engineering at RWTH Aachen, with hands-on battery-production project-management experience at Mercedes-Benz AG and the PEM chair — bridging project management and the engineering itself.</p>
+      <div class="cta-row h-anim" style="animation-delay:.45s">
+        <a href="#portfolio" class="btn btn-primary">View work
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <div class="socials h-anim" style="animation-delay:.55s">
+        <span class="lbl">Connect</span>
+        <a href="https://linkedin.com/in/francisco-alejandro-wisnu" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a href="mailto:francisco.mahawisesa@rwth-aachen.de" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path d="M22 4H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-10 6L2 8V6l10 6 10-6v2z"/></svg></a>
+      </div>
+    </div>
+    <div class="portrait-wrap h-anim" style="animation-delay:.4s">
+      <div class="portrait">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="ph">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Add your photo
+        </div>
+      </div>
+      <div class="stat-chip">
+        <div class="n">Cand. M.Sc.</div><div class="t">Production Engineering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">01</span><h2>About</h2><span class="rule"></span></div>
+    <div class="about-grid">
+      <div class="about-bio reveal">
+        <p>I'm a Production Engineering master's student at <strong>RWTH Aachen University</strong>, focused on the production and industrialization of battery cells and packs for electric mobility.</p>
+        <p>I'm motivated by contributing to projects that create meaningful, lasting impact, and I do my best work on teams with a clear vision and a real commitment to quality. I value <strong>ownership and collaboration</strong> in equal measure — and I bring an analytical mindset, a fast learning curve, and the resilience to see hard problems through.</p>
+        <p>My experience spans both sides of the work: <strong>project management</strong> — budget and schedule planning, reporting, and cross-functional coordination on a battery-production program at <strong>Mercedes-Benz AG</strong> — and <strong>hands-on engineering</strong>, from cell finishing and data preparation at the <strong>PEM chair</strong> to mechanical design. I like understanding the engineering well enough to coordinate it credibly.</p>
+        <div class="stats">
+          <div class="stat"><div class="k">1.3</div><div class="v">Bachelor's thesis (battery production, Mercedes-Benz AG)</div></div>
+          <div class="stat"><div class="k">5×</div><div class="v">Projects across PM &amp; engineering</div></div>
+          <div class="stat"><div class="k">03/27</div><div class="v">Expected graduation · M.Sc. Production Engineering</div></div>
+        </div>
+      </div>
+      <div class="skills reveal">
+        <div class="skill-group">
+          <h3>Engineering &amp; CAD</h3>
+          <div class="chips"><span class="chip">SolidWorks</span><span class="chip">Siemens NX</span><span class="chip">MATLAB</span><span class="chip">ANSYS</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Project Management &amp; Tools</h3>
+          <div class="chips"><span class="chip">think-cell</span><span class="chip">Asana</span><span class="chip">MS Office</span><span class="chip">SAP S/4HANA</span><span class="chip">Python</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Methods</h3>
+          <div class="chips"><span class="chip">Six Sigma (Green Belt)</span><span class="chip">Cross-functional coordination</span><span class="chip">Change management</span><span class="chip">Status reporting</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">02</span><h2>Portfolio</h2><span class="rule"></span></div>
+    <div class="proj-grid">
+
+      <article class="card reveal">
+        <div class="card-visual"><svg class="vicon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/></svg><span class="vlabel">add visual</span></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-num">01</span><span class="tag">Project Management</span></div>
+          <h3>Battery Production Program — Cost Tracking &amp; Coordination</h3>
+          <div class="org">Mercedes-Benz AG</div>
+          <p>Owned the budget and demand planning for a multi-site battery-production program — built an automated Excel–think-cell reporting pipeline feeding a live cost dashboard, and supported the cross-functional coordination cadence with work-package leaders.</p>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-visual"><svg class="vicon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M9 4v16"/></svg><span class="vlabel">add visual</span></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-num">02</span><span class="tag">Battery Engineering</span></div>
+          <h3>Battery Cell Finishing &amp; Data Preparation</h3>
+          <div class="org">PEM Chair · Fraunhofer FFB</div>
+          <p>Produced pouch cells and prepared the incremental-capacity-analysis (ICA) data for a machine-learning quality-prediction study. Cell finishing in a glovebox lab with continuous impedance (EIS) monitoring; data processing in BaSyTec and MATLAB.</p>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-visual"><svg class="vicon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg><span class="vlabel">add visual</span></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-num">03</span><span class="tag">Mechanical Engineering</span></div>
+          <h3>Hydraulics Test-Bench Design</h3>
+          <div class="org">ifas · Grade 1.0</div>
+          <p>Designed a test bench to study gas-bubble implosion in hydraulic fluids — bubble-dynamics calculations in MATLAB (Rayleigh–Plesset, 1D Riemann shock solver), optical measurement concept, and full SolidWorks construction with technical drawings.</p>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-visual"><svg class="vicon" viewBox="0 0 24 24"><path d="M4 20V8M10 20V4M16 20v-8M22 20H2"/></svg><span class="vlabel">add visual</span></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-num">04</span><span class="tag">KPIs · Change Mgmt</span></div>
+          <h3>Sustainability KPI System</h3>
+          <div class="org">Bachelor's Thesis · Mercedes-Benz AG · 1.3</div>
+          <p>Derived a six-indicator KPI system for battery-pack assembly project management — analyzing 18 KPIs, benchmarking 6 systems, and validating through 25 expert interviews. Covers product-change metrics tied to change-management workflows.</p>
+        </div>
+      </article>
+
+      <article class="card reveal" style="grid-column:1/-1">
+        <div class="card-visual" style="height:120px"><svg class="vicon" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg><span class="vlabel">add visual</span></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-num">05</span><span class="tag">Process Improvement</span></div>
+          <h3>Six Sigma Process Improvement</h3>
+          <div class="org">Green Belt Project</div>
+          <p>Led a team-based DMAIC improvement on a filter-manufacturer assembly line — Voice-of-Customer problem definition, Ishikawa root-cause analysis, and concrete recommendations on data consistency and missing-part management. Tasks tracked in Asana.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">03</span><h2>Contact</h2><span class="rule"></span></div>
+    <div class="contact-card reveal">
+      <h2>Let's build something.</h2>
+      <p>Open to internships, working-student roles, and conversations around battery production, project management, and <span style="white-space:nowrap">e-mobility</span>. Happy to share my CV on request.</p>
+      <div class="contact-actions">
+        <a href="mailto:francisco.mahawisesa@rwth-aachen.de" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-10 6L2 8V6l10 6 10-6v2z"/></svg>
+          Say hello</a>
+        <a href="https://linkedin.com/in/francisco-alejandro-wisnu" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      </div>
+      <div class="contact-meta">
+        <div><span class="mono">Email</span><a href="mailto:francisco.mahawisesa@rwth-aachen.de">francisco.mahawisesa@rwth-aachen.de</a></div>
+        <div><span class="mono">Location</span>Aachen, Germany</div>
+        <div><span class="mono">LinkedIn</span><a href="https://linkedin.com/in/francisco-alejandro-wisnu" target="_blank" rel="noopener">/francisco-alejandro-wisnu</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="yr"></span> Francisco Alejandro Wisnu Mahawisesa</span>
+    <a href="#home">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // sticky header
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>20));
+  // mobile menu
+  const burger=document.getElementById('burger'), links=document.getElementById('navlinks');
+  burger.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // active nav highlight
+  const secs=[...document.querySelectorAll('section[id]')];
+  const navA=[...document.querySelectorAll('.nav-links a')];
+  addEventListener('scroll',()=>{
+    let cur=secs[0].id;
+    for(const s of secs){ if(scrollY>=s.offsetTop-120) cur=s.id; }
+    navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur && !a.classList.contains('nav-cta')));
+  });
+  // custom cursor (fine pointer + motion allowed only)
+  (function(){
+    if(!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+    document.body.classList.add('cc');
+    let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+    addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+    (function loop(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button,.card,.chip,.stat').forEach(el=>{
+      el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+      el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+    });
+    document.addEventListener('mouseleave',()=>{dot.style.opacity=0;ring.style.opacity=0;});
+    document.addEventListener('mouseenter',()=>{dot.style.opacity=1;ring.style.opacity=1;});
+  })();
+</script>
+</body>
+</html>
